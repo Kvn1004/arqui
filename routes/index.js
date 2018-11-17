@@ -11,10 +11,11 @@ router.post('/api/doctores', db.createDoctor);
 router.post('/api/pacientes', db.createPacient);
 router.post('/api/login', db.login);
 router.get('/api/lista_p', db.lista_p);
+router.get('/api/registros/:id', getPacientes);
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
-});
+});, 
 
 module.exports = router;

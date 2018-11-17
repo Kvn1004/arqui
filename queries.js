@@ -17,8 +17,26 @@ module.exports = {
 	createDoctor: createDoctor,
 	createPacient: createPacient,
 	login: login,
-	lista_p: lista_p
+	lista_p: lista_p,
+	getPacientes: getPacientes
 };
+
+function getPacientes(req, res, next) {
+  var id = parseInt(req.params.id);
+  db.one('SELECT * FROM Doctor_Paciente WHERE Doctor_id_doctor = $1', id)
+    .then(function (data) {
+      res.status(200)
+        .json({
+          status: 'Exito',
+          data: data,
+          message: 'Pacientes asociados a doctor'
+        });
+    })
+    .catch(function (err) {
+      return next(err);
+    });
+}
+
 
 function lista_p(req, res, next) {
 	db.any('SELECT * FROM Paciente ' +
