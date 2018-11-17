@@ -1,0 +1,18 @@
+insert into doctor(nombre) values ('Hugo Roldan');
+insert into paciente(nombre) values ('Martin Olmo');
+
+insert into doctor_paciente(Doctor_id_doctor, Paciente_id_paciente, TS, Frecuencia, SPO2) values
+((select doctor.id_doctor
+ from doctor
+ where doctor.nombre = 'Hugo Roldan'),
+(select paciente.id_paciente
+ from paciente
+ where paciente.nombre = 'Martin Olmo'), now(), 60, 90);
+ 
+ select * from doctor_paciente
+ 
+ SELECT d.nombre AS Doctor, p.nombre AS Paciente, dp.ts AS Timestamp, dp.frecuencia AS Frecuencia, dp.spo2 AS SPO2
+ FROM Doctor d, Paciente p, Doctor_Paciente dp
+ WHERE d.id_doctor = dp.doctor_id_doctor
+ AND p.id_paciente = dp.paciente_id_paciente
+ 
